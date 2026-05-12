@@ -2,11 +2,11 @@
 
 import { useEffect } from "react";
 
-import { useTelegram } from "../../hooks/useTelegram";
+import { useTelegram } from "../../hooks/usetelegram";
 
 import { useAuthStore } from "../../stores/auth.store";
 
-export default function TelegramAuth() {
+export default function telegramAuth() {
   const { user } = useTelegram();
 
   const { setAuth } = useAuthStore();
