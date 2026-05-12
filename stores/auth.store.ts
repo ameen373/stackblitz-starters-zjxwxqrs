@@ -1,59 +1,35 @@
-import { create } from "zustand";
+"use client";
 
-interface User {
-  id: string;
+import { useEffect } from "react";
 
-  telegramId: string;
+import { useTelegram } from "../../hooks/useTelegram";
 
-  username?: string;
+import { useAuthStore } from "../../stores/auth.store";
 
-  firstName?: string;
+export default function TelegramAuth() {
+  const { user } = useTelegram();
 
-  lastName?: string;
+  const { setAuth } = useAuthStore();
 
-  photoUrl?: string;
-}
+  useEffect(() => {
+    if (!user) return;
 
-interface AuthState {
-  user: User | null;
+    const fakeToken = `telegram_${user.id}`;
 
-  token: string | null;
+    setAuth(fakeToken, {
+      id: String(user.id),
 
-  isAuthenticated: boolean;
+      telegramId: String(user.id),
 
-  setAuth: (token: string, user: User) => void;
+      username: user.username || "",
 
-  logout: () => void;
-}
+      firstName: user.first_name || "",
 
-export const useAuthStore = create<AuthState>((set) => ({
-  user: null,
+      lastName: user.last_name || "",
 
-  token: null,
-
-  isAuthenticated: false,
-
-  setAuth: (token, user) => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("token", token);
-    }
-
-    set({
-      token,
-      user,
-      isAuthenticated: true,
+      photoUrl: user.photo_url || "",
     });
-  },
+  }, [user, setAuth]);
 
-  logout: () => {
-    if (typeof window !== "undefined") {
-      localStorage.removeItem("token");
-    }
-
-    set({
-      token: null,
-      user: null,
-      isAuthenticated: false,
-    });
-  },
-}));
+  return null;
+}
