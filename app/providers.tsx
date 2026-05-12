@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import { useState } from "react";
 
-import TelegramAuth from "@/components/telegram/TelegramAuth";
+import TelegramAuth from "../components/telegram/TelegramAuth";
 
 export default function Providers({
   children,
