@@ -1,50 +1,48 @@
-import { create } from "zustand";
+{
+  "compilerOptions": {
+    "target": "ES2017",
 
-interface User {
-  id: string;
-  telegramId: string;
-  username?: string;
-  firstName?: string;
-  lastName?: string;
-  photoUrl?: string;
-}
+    "lib": ["dom", "dom.iterable", "esnext"],
 
-interface AuthState {
-  user: User | null;
+    "allowJs": true,
 
-  token: string | null;
+    "skipLibCheck": true,
 
-  isAuthenticated: boolean;
+    "strict": true,
 
-  setAuth: (token: string, user: User) => void;
+    "noEmit": true,
 
-  logout: () => void;
-}
+    "esModuleInterop": true,
 
-export const useAuthStore = create<AuthState>((set) => ({
-  user: null,
+    "module": "esnext",
 
-  token: null,
+    "moduleResolution": "bundler",
 
-  isAuthenticated: false,
+    "resolveJsonModule": true,
 
-  setAuth: (token, user) => {
-    localStorage.setItem("token", token);
+    "isolatedModules": true,
 
-    set({
-      token,
-      user,
-      isAuthenticated: true,
-    });
+    "jsx": "preserve",
+
+    "incremental": true,
+
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
 
-  logout: () => {
-    localStorage.removeItem("token");
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
 
-    set({
-      token: null,
-      user: null,
-      isAuthenticated: false,
-    });
-  },
-}));
+  "exclude": ["node_modules"]
+}
