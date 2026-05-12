@@ -3,9 +3,7 @@
 import { useEffect } from "react";
 
 import { useTelegram } from "@/hooks/useTelegram";
-
 import { useAuthStore } from "@/stores/auth.store";
-
 export default function TelegramAuth() {
   const { user } = useTelegram();
 
