@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-import { useAuthStore } from "@/stores/auth.store";
+import { useAuthStore } from "../stores/auth.store";
 
 export default function HomePage() {
   const { user } = useAuthStore();
